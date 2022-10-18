@@ -4,9 +4,35 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
+    <nav class="bg-purple-600 text-white">
+      <div class="container mx-auto">
+        <div class="flex items-center">
+          <RouterLink
+            to="/"
+            class="
+              inline-block
+              px-16
+              py-4
+              transition-colors
+              hover:bg-purple-500
+              duration-300
+            "
+            >Home</RouterLink
+          >
+          <RouterLink
+            to="/todos"
+            class="
+              inline-block
+              px-16
+              py-4
+              transition-colors
+              hover:bg-purple-500
+              duration-300
+            "
+            >Todos</RouterLink
+          >
+        </div>
+      </div>
     </nav>
   </header>
 
