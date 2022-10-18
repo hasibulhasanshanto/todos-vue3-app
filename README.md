@@ -1,14 +1,10 @@
-# todos
+# Todos with compostion API
 
-This template should help get you started developing with Vue 3 in Vite.
+This is simple todos app using vue3, composition api, tailwind css and vite
 
-## Recommended IDE Setup
+## Frameworsk are
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 

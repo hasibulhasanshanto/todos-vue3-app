@@ -17,6 +17,7 @@
               items-center
               justify-between
             "
+            :class="{ 'bg-green-200': todo.done }"
           >
             <div>
               <div>{{ todo.text }}</div>
@@ -25,13 +26,27 @@
               </div>
             </div>
             <div class="space-x-2">
-              <button class="px-2 text-red-600" title="Remove todo">
+              <button
+                @click="removeTodo(index)"
+                class="px-2 text-red-600"
+                title="Remove todo"
+              >
                 &times;
               </button>
-              <button class="px-2 text-green-600" title="Mark as done">
+              <button
+                v-if="!todo.done"
+                @click="markAsDone(index)"
+                class="px-2 text-green-600"
+                title="Mark as done"
+              >
                 &check;
               </button>
-              <button class="px-2 text-orange-600" title="Mark as undone">
+              <button
+                v-else
+                @click="markAsUndone(index)"
+                class="px-2 text-orange-600"
+                title="Mark as undone"
+              >
                 &#8630;
               </button>
             </div>
@@ -63,6 +78,7 @@
 <script>
 import axios from "axios";
 import { defineComponent, reactive, ref } from "vue";
+
 export default defineComponent({
   setup() {
     const todos = reactive([]);
@@ -78,10 +94,26 @@ export default defineComponent({
 
       todoText.value = "";
     }
+    function markAsDone(index) {
+      todos[index].done = true;
+    }
+    function markAsUndone(index) {
+      todos[index].done = false;
+    }
+
+    function removeTodo(index) {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
+      todos.splice(index, 1);
+    }
     return {
       todos,
       todoText,
       addTodo,
+      markAsDone,
+      markAsUndone,
+      removeTodo,
     };
   },
 });
