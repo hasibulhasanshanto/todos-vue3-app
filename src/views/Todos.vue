@@ -6,7 +6,7 @@
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-6 space-y-4 px-1" style="height: 500px">
           <div
-            v-for="(todo, index) in todos"
+            v-for="(todo, index) in state.todos"
             :key="index"
             class="
               p-8
@@ -52,7 +52,7 @@
             </div>
           </div>
           <div
-            v-if="todos.length === 0"
+            v-if="state.todos.length === 0"
             class="px-8 py-16 bg-white text-gray-700 shadow-md rounded text-sm"
           >
             You dont have any task to do.
@@ -64,7 +64,7 @@
             <h2 class="text-xl">Add a todo</h2>
             <input
               type="text"
-              v-model="todoText"
+              v-model="state.todoText"
               @keydown.enter="addTodo"
               class="p-2 mt-4 border rounded w-full"
             />
@@ -76,40 +76,39 @@
 </template>
 
 <script>
-import axios from "axios";
 import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    const todos = reactive([]);
-
-    const todoText = ref("");
+    const state = reactive({
+      todos: [],
+      todoText: "",
+    });
 
     function addTodo() {
-      todos.unshift({
-        text: todoText.value,
+      state.todos.unshift({
+        text: state.todoText,
         createdAt: new Date(),
         done: false,
       });
 
-      todoText.value = "";
+      state.todoText = "";
     }
     function markAsDone(index) {
-      todos[index].done = true;
+      state.todos[index].done = true;
     }
     function markAsUndone(index) {
-      todos[index].done = false;
+      state.todos[index].done = false;
     }
 
     function removeTodo(index) {
       if (!confirm("Are you sure?")) {
         return;
       }
-      todos.splice(index, 1);
+      state.todos.splice(index, 1);
     }
     return {
-      todos,
-      todoText,
+      state,
       addTodo,
       markAsDone,
       markAsUndone,
